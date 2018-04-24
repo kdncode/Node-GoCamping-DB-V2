@@ -59,7 +59,7 @@ app.get("/campgrounds", (req, res) => {
     GoCamping.find({}, (err, allGoCampings) => {
         if (err) { console.log(err) }
         else {
-            res.render("campgrounds", {camps: allGoCampings})
+            res.render("index", {camps: allGoCampings})
          }
     })
 })
@@ -71,7 +71,8 @@ app.post("/campgrounds", (req, res) => {
     // Get data from form & add to camps array
     var name = req.body.name;
     var image = req.body.image;
-    var newCamp = { name: name, image: image }
+    var desc = req.body.description;
+    var newCamp = { name: name, image: image, description: desc }
     
     // Create a new gocamping and save to DB
     GoCamping.create(newCamp, (err, newlyCreated) =>{
@@ -89,12 +90,17 @@ app.get("/campgrounds/new", (req, res) => {
     res.render("new")
 })
 
-//
+// SHOW - shows more info about one gocamping
 app.get("/campgrounds/:id", (req, res) => {
 
     // Find the gocamping with provided ID
-    // 
-    res.send("New new new ")
+    GoCamping.findById(req.params.id, (err, foundGoCamping) => {
+        if (err) { console.log(err)}
+        else { 
+            // Render show template with that gocamping
+            res.render("show", { camps: foundGoCamping })
+        }
+    })
 })
 
 app.listen(process.env.PORT || 3000, () => {
