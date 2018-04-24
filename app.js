@@ -50,6 +50,7 @@ app.get("/", (req, res) => {
     res.render("landing")
 })
 
+// INDEX - Show all gocampings
 app.get("/campgrounds", (req, res) => {
 
     // Get all gocampings from DB
@@ -62,6 +63,7 @@ app.get("/campgrounds", (req, res) => {
     
 })
 
+// CREAT - add new gocamping to DB
 app.post("/campgrounds", (req, res) => {
 
     // Get data from form & add to camps array
@@ -78,6 +80,8 @@ app.post("/campgrounds", (req, res) => {
         }
     })
 })
+
+// NEW - form from to create new gocamping 
 
 app.get("/campgrounds/new", (req, res) => {
     res.render("new")
