@@ -12,22 +12,24 @@ app.set("view engine", "ejs")
 // Schema setup
 var gocampingSchema = new mongoose.Schema({
     name: String,
-    image: String
+    image: String,
+    description: String
 })
 
 // Convert to model
 var GoCamping = mongoose.model("GoCamping", gocampingSchema);
 
 // Create a GoCamping
-// GoCamping.create({
-//     name: "Yingyang", 
-//     image: "https://macaobeachhostel.com/wp-content/uploads/2017/08/Slide01-2.jpg"
+GoCamping.create({
+    name: "Yingyang", 
+    image: "https://macaobeachhostel.com/wp-content/uploads/2017/08/Slide01-2.jpg",
+    description: "Hello world. It's me Yingyang.... Go go go"
     
-// }, (err, gocamping) => {
-//     if(err) { console.log(err) }
-//     else { console.log("Newly created gocamping")
-//             console.log(gocamping) }
-// })
+}, (err, gocamping) => {
+    if(err) { console.log(err) }
+    else { console.log("Newly created gocamping")
+            console.log(gocamping) }
+})
 
 
 // var camps = [
@@ -60,8 +62,8 @@ app.get("/campgrounds", (req, res) => {
             res.render("campgrounds", {camps: allGoCampings})
          }
     })
-    
 })
+
 
 // CREAT - add new gocamping to DB
 app.post("/campgrounds", (req, res) => {
@@ -85,6 +87,14 @@ app.post("/campgrounds", (req, res) => {
 
 app.get("/campgrounds/new", (req, res) => {
     res.render("new")
+})
+
+//
+app.get("/campgrounds/:id", (req, res) => {
+
+    // Find the gocamping with provided ID
+    // 
+    res.send("New new new ")
 })
 
 app.listen(process.env.PORT || 3000, () => {
